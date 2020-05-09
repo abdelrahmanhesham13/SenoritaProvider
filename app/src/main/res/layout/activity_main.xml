@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="com.senoritasaudi.senoritaprovider.events.OnClickListener" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center_horizontal"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        tools:context=".views.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:background="?attr/actionBarItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/menu"
+                android:tint="@android:color/white"
+                android:onClick="@{v -> clickHandler.onClick(v)}"
+                android:src="@drawable/ic_menu" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/im_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/clinic_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/jf_flat"
+                    android:text="عيادة د فايزه"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/current_bookings_parent"
+                    android:layout_marginTop="25dp"
+                    android:onClick="@{v -> clickHandler.onClick(v)}"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:foreground="?attr/selectableItemBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/current_bookings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/jf_flat"
+                            android:text="الحجوزات الحالية"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/current_bookings_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/current_bookings"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:fontFamily="@font/jf_flat"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/current_bookings_number"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/im_current_bookings"
+                            android:src="@drawable/im_heart_beating"
+                            android:tint="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/im_current_bookings"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="25dp"
+                            android:src="@drawable/im_current_bookings"
+                            android:tint="#FFFFFF" />
+
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/finished_bookings_parent"
+                    android:layout_marginTop="10dp"
+                    android:onClick="@{v -> clickHandler.onClick(v)}"
+                    app:cardBackgroundColor="#DAA520"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/finished_bookings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/jf_flat"
+                            android:text="الحجوزات المنتهية"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/finished_bookings_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/finished_bookings"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:fontFamily="@font/jf_flat"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/finished_bookings_number"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/im_finished_bookings"
+                            android:src="@drawable/im_heart_beating"
+                            android:tint="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/im_finished_bookings"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="25dp"
+                            android:src="@drawable/im_completed_bookings"
+                            android:tint="#FFFFFF" />
+
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:onClick="@{v -> clickHandler.onClick(v)}"
+                    android:id="@+id/canceled_bookings_parent"
+                    app:cardBackgroundColor="#2392A0"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/canceled_bookings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/jf_flat"
+                            android:text="الحجوزات الملغية"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/canceled_bookings_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/canceled_bookings"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:fontFamily="@font/jf_flat"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/canceled_bookings_number"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/im_canceled_bookings"
+                            android:src="@drawable/im_heart_beating"
+                            android:tint="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/im_canceled_bookings"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="25dp"
+                            android:src="@drawable/im_canceled_bookings"
+                            android:tint="#FFFFFF" />
+
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</layout>
