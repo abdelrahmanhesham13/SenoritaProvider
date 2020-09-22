@@ -289,9 +289,9 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
             }
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle(getString(R.string.select_date));
-        //mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         long timeInMilliseconds = Calendar.getInstance().getTimeInMillis();
         try {
             Date mDate = sdf.parse(offerModel.getValidDate());
