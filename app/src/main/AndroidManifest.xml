@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.ReviewsActivity"></activity>
+        <activity android:name=".views.WebViewActivity"/>
+        <activity android:name=".views.ReviewsActivity" />
         <activity
             android:name=".views.MenuActivity"
             android:theme="@style/NoActionBarTheme" />
@@ -41,7 +42,6 @@
         <activity android:name=".views.InformationActivity" />
         <activity android:name=".views.NotificationsActivity" />
         <activity android:name=".views.DepartmentOffersActivity" />
-
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

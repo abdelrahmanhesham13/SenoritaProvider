@@ -30,6 +30,7 @@ public class ReviewsActivity extends BaseActivityWithViewModel<MainViewModel, Ac
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        setTitle("التقييمات");
         reviewsAdapter = new ReviewsAdapter(this);
         getActivityBinding().reviews.setHasFixedSize(true);
         getActivityBinding().reviews.setLayoutManager(new LinearLayoutManager(this));
@@ -38,7 +39,10 @@ public class ReviewsActivity extends BaseActivityWithViewModel<MainViewModel, Ac
             @Override
             public void onChanged(ReviewResponseModel reviewResponseModel) {
                 getActivityBinding().progressParent.setVisibility(View.GONE);
-                reviewsAdapter.addReviews((ArrayList<ReviewModel>) reviewResponseModel.getRequests());
+                if (reviewResponseModel != null) {
+                    if (reviewResponseModel.getStatus())
+                        reviewsAdapter.addReviews((ArrayList<ReviewModel>) reviewResponseModel.getRequests());
+                }
             }
         });
     }

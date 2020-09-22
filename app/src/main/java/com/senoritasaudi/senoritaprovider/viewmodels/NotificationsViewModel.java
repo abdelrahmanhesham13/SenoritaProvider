@@ -21,7 +21,7 @@ public class NotificationsViewModel extends AndroidViewModel {
         MainRepository mainRepository = MainRepository.getInstance();
         storeManager = new StoreManager(application);
         if (storeManager.containsUser()) {
-            notificationResponseModelLiveData = (MutableLiveData<NotificationResponseModel>) mainRepository.getNotifications(storeManager.getUser().getId());
+            notificationResponseModelLiveData = (MutableLiveData<NotificationResponseModel>) mainRepository.getNotifications(storeManager.getClinic().getId(),storeManager.getUser().getId());
         } else {
             notificationResponseModelLiveData = new MutableLiveData<>();
             notificationResponseModelLiveData.setValue(null);

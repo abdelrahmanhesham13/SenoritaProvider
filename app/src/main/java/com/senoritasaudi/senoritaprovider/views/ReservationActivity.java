@@ -38,6 +38,7 @@ import com.senoritasaudi.senoritaprovider.views.baseviews.BaseActivityWithViewMo
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
@@ -61,6 +62,7 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (requestId != null) {
+            setTitle("تغيير الموعد");
             getActivityViewModel().getRequest(requestId).observe(this, new Observer<RequestsModelResponse>() {
                 @Override
                 public void onChanged(RequestsModelResponse requestsModelResponse) {
@@ -80,7 +82,9 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
                 }
             });
             getActivityBinding().editText3.setVisibility(View.GONE);
+            getActivityBinding().nextButton.setText("تغيير الموعد");
         } else {
+            setTitle("احجز الان");
             getActivityViewModel().getOffer(offerId).observe(this, new Observer<OfferResponseModel>() {
                 @Override
                 public void onChanged(OfferResponseModel offerResponseModel) {
@@ -94,6 +98,7 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
                             .into(getActivityBinding().imageView29);
                 }
             });
+            getActivityBinding().nextButton.setText("احجز الان");
         }
     }
     @Override
@@ -284,7 +289,21 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
             }
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle(getString(R.string.select_date));
-        mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        //mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        long timeInMilliseconds = Calendar.getInstance().getTimeInMillis();
+        try {
+            Date mDate = sdf.parse(offerModel.getValidDate());
+            if (mDate != null) {
+                timeInMilliseconds = mDate.getTime();
+            }
+            Log.d(TAG, "showDateDialog: " + timeInMilliseconds);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mDatePicker.getDatePicker().setMaxDate(timeInMilliseconds);
         mDatePicker.show();
     }
 }

@@ -81,7 +81,7 @@ public class MainRepository {
         return reservationResponseModelMutableLiveData;
     }
 
-    public LiveData<OfferResponseModel> search(HashMap<String,String> hashMap) {
+    public LiveData<OfferResponseModel> search(HashMap<String, String> hashMap) {
         final MutableLiveData<OfferResponseModel> offerResponseModelMutableLiveData = new MutableLiveData<>();
         apiService.search(hashMap).enqueue(new Callback<OfferResponseModel>() {
             @Override
@@ -102,7 +102,7 @@ public class MainRepository {
         return offerResponseModelMutableLiveData;
     }
 
-    public LiveData<RequestsModelResponse> searchBookings(HashMap<String,String> hashMap) {
+    public LiveData<RequestsModelResponse> searchBookings(HashMap<String, String> hashMap) {
         final MutableLiveData<RequestsModelResponse> offerResponseModelMutableLiveData = new MutableLiveData<>();
         apiService.searchBookings(hashMap).enqueue(new Callback<RequestsModelResponse>() {
             @Override
@@ -129,10 +129,7 @@ public class MainRepository {
             @Override
             public void onResponse(@NotNull Call<ReviewResponseModel> call, @NotNull Response<ReviewResponseModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getStatus())
-                        reviewResponseModelMutableLiveData.setValue(response.body());
-                    else
-                        reviewResponseModelMutableLiveData.setValue(null);
+                    reviewResponseModelMutableLiveData.setValue(response.body());
                 } else {
                     reviewResponseModelMutableLiveData.setValue(null);
                 }
@@ -210,9 +207,9 @@ public class MainRepository {
         return reservationResponseModelMutableLiveData;
     }
 
-    public LiveData<FeedbackResponse> deleteRequest(String clinicId, String status , String requestId) {
+    public LiveData<FeedbackResponse> deleteRequest(String clinicId, String status, String requestId) {
         final MutableLiveData<FeedbackResponse> feedbackResponseMutableLiveData = new MutableLiveData<>();
-        apiService.deleteRequest(requestId, status,clinicId).enqueue(new Callback<FeedbackResponse>() {
+        apiService.deleteRequest(requestId, status, clinicId).enqueue(new Callback<FeedbackResponse>() {
             @Override
             public void onResponse(@NotNull Call<FeedbackResponse> call, @NotNull Response<FeedbackResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -258,7 +255,7 @@ public class MainRepository {
 
     public LiveData<LoginResponseModel> login(String token, String password, String mobile) {
         final MutableLiveData<LoginResponseModel> loginResponseModelMutableLiveData = new MutableLiveData<>();
-        apiService.login(password, mobile).enqueue(new Callback<LoginResponseModel>() {
+        apiService.login(password, mobile, token).enqueue(new Callback<LoginResponseModel>() {
             @Override
             public void onResponse(@NotNull Call<LoginResponseModel> call, @NotNull Response<LoginResponseModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -277,9 +274,30 @@ public class MainRepository {
         return loginResponseModelMutableLiveData;
     }
 
-    public LiveData<RequestsModelResponse> getRequests(String clinicId , String status) {
+    public LiveData<RequestsModelResponse> getRequests(String clinicId, String status) {
         final MutableLiveData<RequestsModelResponse> requestsModelResponseMutableLiveData = new MutableLiveData<>();
-        apiService.getRequests(clinicId,status).enqueue(new Callback<RequestsModelResponse>() {
+        apiService.getRequests(clinicId, status).enqueue(new Callback<RequestsModelResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<RequestsModelResponse> call, @NotNull Response<RequestsModelResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    requestsModelResponseMutableLiveData.setValue(response.body());
+                } else {
+                    requestsModelResponseMutableLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<RequestsModelResponse> call, @NotNull Throwable t) {
+                t.printStackTrace();
+                requestsModelResponseMutableLiveData.setValue(null);
+            }
+        });
+        return requestsModelResponseMutableLiveData;
+    }
+
+    public LiveData<RequestsModelResponse> getRequest(String requestId, String clinicId) {
+        final MutableLiveData<RequestsModelResponse> requestsModelResponseMutableLiveData = new MutableLiveData<>();
+        apiService.getRequest(requestId, clinicId).enqueue(new Callback<RequestsModelResponse>() {
             @Override
             public void onResponse(@NotNull Call<RequestsModelResponse> call, @NotNull Response<RequestsModelResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -301,33 +319,9 @@ public class MainRepository {
         return requestsModelResponseMutableLiveData;
     }
 
-    public LiveData<RequestsModelResponse> getRequest(String requestId , String clinicId) {
-        final MutableLiveData<RequestsModelResponse> requestsModelResponseMutableLiveData = new MutableLiveData<>();
-        apiService.getRequest(requestId,clinicId).enqueue(new Callback<RequestsModelResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<RequestsModelResponse> call, @NotNull Response<RequestsModelResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getStatus())
-                        requestsModelResponseMutableLiveData.setValue(response.body());
-                    else
-                        requestsModelResponseMutableLiveData.setValue(null);
-                } else {
-                    requestsModelResponseMutableLiveData.setValue(null);
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<RequestsModelResponse> call, @NotNull Throwable t) {
-                t.printStackTrace();
-                requestsModelResponseMutableLiveData.setValue(null);
-            }
-        });
-        return requestsModelResponseMutableLiveData;
-    }
-
-    public LiveData<NotificationResponseModel> getNotifications(String userId) {
+    public LiveData<NotificationResponseModel> getNotifications(String clinicId, String userId) {
         final MutableLiveData<NotificationResponseModel> notificationResponseModelMutableLiveData = new MutableLiveData<>();
-        apiService.getNotifications(userId).enqueue(new Callback<NotificationResponseModel>() {
+        apiService.getNotifications(clinicId, userId).enqueue(new Callback<NotificationResponseModel>() {
             @Override
             public void onResponse(@NotNull Call<NotificationResponseModel> call, @NotNull Response<NotificationResponseModel> response) {
                 if (response.isSuccessful() && response.body() != null) {

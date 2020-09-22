@@ -18,6 +18,7 @@ import com.senoritasaudi.senoritaprovider.R;
 import com.senoritasaudi.senoritaprovider.databinding.ListReservationItemBinding;
 import com.senoritasaudi.senoritaprovider.events.OnItemClicked;
 import com.senoritasaudi.senoritaprovider.models.RequestModel;
+import com.senoritasaudi.senoritaprovider.views.WebViewActivity;
 import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.ArrayList;
@@ -158,20 +159,7 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Reserv
                 listReservationItemBinding.qrCode.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        new FinestWebView.Builder(mContext)
-                                .rtl(true)
-                                .showUrl(false)
-                                .updateTitleFromHtml(false)
-                                .toolbarColor(ContextCompat.getColor(mContext,android.R.color.white))
-                                .menuColor(ContextCompat.getColor(mContext,android.R.color.white))
-                                .titleColor(ContextCompat.getColor(mContext,android.R.color.white))
-                                .toolbarColor(ContextCompat.getColor(mContext,R.color.colorPrimary))
-                                .statusBarColor(ContextCompat.getColor(mContext,R.color.colorPrimary))
-                                .titleDefault("QR Code")
-                                .showMenuCopyLink(false)
-                                .showMenuOpenWith(false)
-                                .showMenuShareVia(false)
-                                .show("https://senoritasaudi.com/clinics/api/generate_qrcode?id=" + requestModels.get(getAdapterPosition()).getId());
+                        mContext.startActivity(new Intent(mContext, WebViewActivity.class).putExtra("id",requestModels.get(getAdapterPosition()).getId()));
                     }
                 });
             }

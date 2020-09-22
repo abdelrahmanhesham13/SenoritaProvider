@@ -49,7 +49,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<FeedbackResponse> deleteRequest(String requestId, String status, String clinicId) {
-        return mainRepository.deleteRequest(requestId,status,clinicId);
+        return mainRepository.deleteRequest(clinicId,status,requestId);
     }
 
     public void saveClinic(ClinicModel clinicModel) {

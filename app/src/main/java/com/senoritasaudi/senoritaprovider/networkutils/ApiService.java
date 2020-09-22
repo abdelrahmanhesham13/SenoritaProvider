@@ -43,7 +43,8 @@ public interface ApiService {
 
     @GET("clinic_login")
     Call<LoginResponseModel> login(@Query("password") String password,
-                                   @Query("mobile") String mobile);
+                                   @Query("mobile") String mobile,
+                                   @Query("token") String token);
 
     @GET("clinic_requests_count")
     Call<ClinicRequestsCountResponseModel> getClinicRequestsCount(@Query("clinic_id") String password);
@@ -53,7 +54,8 @@ public interface ApiService {
                                             @Query("status") String status);
 
     @GET("get_notifications")
-    Call<NotificationResponseModel> getNotifications(@Query("user_id") String userId);
+    Call<NotificationResponseModel> getNotifications(@Query("clinic_id") String clinicId,
+                                                     @Query("user_id") String userId);
 
     @GET("clinic_requests")
     Call<RequestsModelResponse> getRequest(@Query("id") String requestId ,
