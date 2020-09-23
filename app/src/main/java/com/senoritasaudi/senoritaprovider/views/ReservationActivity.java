@@ -277,6 +277,7 @@ public class ReservationActivity extends BaseActivityWithViewModel<ReservationVi
 
     private void showDateDialog() {
         Calendar calendar = Calendar.getInstance();
+
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH);
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
