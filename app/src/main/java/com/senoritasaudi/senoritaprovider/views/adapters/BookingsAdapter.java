@@ -62,6 +62,7 @@ public class BookingsAdapter extends RecyclerView.Adapter<BookingsAdapter.Reserv
         }
 
         holder.listReservationItemBinding.reservationNumber.setText(String.format("%s : %s", mContext.getString(R.string.reservation_number), requestModels.get(position).getId()));
+        holder.listReservationItemBinding.price.setText("سعر العرض : " + requestModels.get(position).getOffer().getPrice());
         holder.listReservationItemBinding.date.setText(requestModels.get(position).getSelectedDate() + "\n" + requestModels.get(position).getSelectedTime());
         holder.listReservationItemBinding.textView21.setText(mContext.getString(R.string.offer_number) + " : " + requestModels.get(position).getOfferId());
         Glide.with(mContext)
